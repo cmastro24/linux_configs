@@ -1,0 +1,106 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 34,
+  "spacing": 8,
+  "margin-top": 8,
+  "margin-left": 10,
+  "margin-right": 10,
+
+  "modules-left": ["sway/workspaces", "sway/mode"],
+  "modules-center": ["sway/window"],
+  "modules-right": [
+    "cpu",
+    "memory",
+    "temperature",
+    "backlight",
+    "pulseaudio",
+    "network",
+    "battery",
+    "tray",
+    "clock",
+    "custom/power"
+  ],
+
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{name}",
+    "on-click": "activate"
+  },
+
+  "sway/mode": {
+    "format": "<span style='italic'>{}</span>"
+  },
+
+  "sway/window": {
+    "max-length": 80,
+    "separate-outputs": true
+  },
+
+  "cpu": {
+    "interval": 5,
+    "format": "CPU {usage}%"
+  },
+
+  "memory": {
+    "interval": 5,
+    "format": "RAM {}%"
+  },
+
+  "temperature": {
+    "critical-threshold": 85,
+    "format": "{temperatureC}C"
+  },
+
+  "backlight": {
+    "format": "{percent}%",
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-"
+  },
+
+  "pulseaudio": {
+    "format": "VOL {volume}%",
+    "format-muted": "MUTED",
+    "on-click": "pavucontrol",
+    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"
+  },
+
+  "network": {
+    "format-wifi": "{essid} ({signalStrength}%)",
+    "format-ethernet": "{ifname}",
+    "format-linked": "{ifname} (no IP)",
+    "format-disconnected": "Offline",
+    "tooltip-format": "{ipaddr}/{cidr} via {gwaddr}",
+    "on-click": "nm-connection-editor"
+  },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "BAT {icon} {capacity}%",
+    "format-charging": "{capacity}% +",
+    "format-plugged": "{capacity}% AC",
+    "format-alt": "{time} {icon}",
+    "format-icons": ["[=    ]", "[==   ]", "[===  ]", "[==== ]", "[=====]"]
+  },
+
+  "tray": {
+    "spacing": 10
+  },
+
+  "clock": {
+    "format": "{:%a %d %b  %H:%M}",
+    "tooltip-format": "{:%Y-%m-%d}"
+  },
+
+  "custom/power": {
+    "format": "PWR",
+    "tooltip": true,
+    "tooltip-format": "Power menu",
+    "on-click": "~/.config/rofi/powermenu.sh"
+  }
+}
