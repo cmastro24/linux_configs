@@ -7,7 +7,7 @@
   "margin-left": 10,
   "margin-right": 10,
 
-  "modules-left": ["sway/workspaces", "sway/mode"],
+  "modules-left": ["sway/workspaces", "sway/mode", "custom/games"],
   "modules-center": ["sway/window"],
   "modules-right": [
     "cpu",
@@ -15,6 +15,7 @@
     "temperature",
     "backlight",
     "pulseaudio",
+    "custom/bluetooth",
     "network",
     "battery",
     "tray",
@@ -24,13 +25,20 @@
 
   "sway/workspaces": {
     "disable-scroll": true,
-    "all-outputs": true,
+    "all-outputs": false,
     "format": "{name}",
     "on-click": "activate"
   },
 
   "sway/mode": {
     "format": "<span style='italic'>{}</span>"
+  },
+
+  "custom/games": {
+    "format": "󰊗 PLAY",
+    "tooltip": true,
+    "tooltip-format": "Game launchers · Super+G",
+    "on-click": "~/.config/sway/scripts/game-menu.sh"
   },
 
   "sway/window": {
@@ -60,11 +68,21 @@
   },
 
   "pulseaudio": {
-    "format": "VOL {volume}%",
-    "format-muted": "MUTED",
-    "on-click": "pavucontrol",
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟 muted",
+    "format-icons": ["󰕿", "󰖀", "󰕾"],
+    "on-click": "~/.config/waybar/scripts/waybar-menu.sh volume",
     "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+",
     "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"
+  },
+
+  "custom/bluetooth": {
+    "exec": "~/.config/waybar/scripts/waybar-menu.sh bluetooth status",
+    "return-type": "json",
+    "interval": 10,
+    "tooltip": true,
+    "on-click": "~/.config/waybar/scripts/waybar-menu.sh bluetooth menu",
+    "on-click-right": "~/.config/waybar/scripts/waybar-menu.sh bluetooth toggle"
   },
 
   "network": {
@@ -98,9 +116,9 @@
   },
 
   "custom/power": {
-    "format": "PWR",
+    "format": "󰐥",
     "tooltip": true,
     "tooltip-format": "Power menu",
-    "on-click": "~/.config/rofi/powermenu.sh"
+    "on-click": "~/.config/waybar/scripts/waybar-menu.sh power"
   }
 }
